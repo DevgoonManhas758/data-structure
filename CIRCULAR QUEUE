@@ -30,7 +30,7 @@ int peek(){
     return queue[front];
 }
 int display(){
- 
+ Printf(
    
 }
 int main(){
