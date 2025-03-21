@@ -1,8 +1,8 @@
-include<stdio.h>
+#include<stdio.h>
 #include<stdlib.h>
-typedef struct node{
+typedef struct Node{
     int data;
-    struct Node *next;
+    struct Node* next;
 }Node;
 Node* head = NULL;
 Node* createNode(int ele){
@@ -17,6 +17,42 @@ void insertNodeInBeg(int ele){
     printf("Node Inserted !!!!!\n");
     
 }
+void insertNodeAtEnd(int ele){
+    Node*newNode = createNode(ele);
+    if(head==NULL)
+    head = newNode;
+    else{
+        Node* temp = head;
+        while(temp->next != NULL){
+            temp = temp->next;
+        }
+        temp->next  = newNode;
+        printf("Node Inserted !!!\n");
+    }
+}
+void insertNodeAtAnyPos(int ele , int pos){
+    if(head==NULL)
+    printf("List is Empty!!!\n");
+    else if(pos==1)
+    insertNodeInBeg(ele);
+    else{
+        int i = 1;
+        Node* temp = head;
+        while(i<pos-1 && temp->next != NULL){
+            temp = temp->;
+            i++;
+        }
+        if(temp->next != NULL){
+            Node* newNode = createNode(ele);
+            newNode->next = temp->next;
+            temp=>next = newNode;
+            
+        }
+    }
+    
+    
+    
+}
 void display(){
     if(head==NULL)
     printf("Linked List is empty!!!!\n");
@@ -29,6 +65,7 @@ void display(){
     }
 }
 int main(){
+    int value;
     while(1){   
         printf("---- Singly Linked List -----\n");
         printf("1. Insert Node In Beginning\n");
@@ -46,6 +83,10 @@ int main(){
         scanf("%d",&choice);
         switch(choice){
             case 1:
+            printf("Enter Value :");
+            scanf("%d",&value);
+            insertNodeInBeg(value);
+            
             break;
               case 2:
             break;
@@ -62,12 +103,14 @@ int main(){
               case 8:
             break;
               case 9:
+              display();
             break;
               case 10:
                 exit(0);
                 default:
                 printf("Invalid Choice!!!!\n");
         }
+        system("pause");
     }
     return 0;
 }
