@@ -49,9 +49,79 @@ void insertNodeAtAnyPos(int ele , int pos){
             
         }
     }
+
+}
+void deleteNodeFromBeg(){
+    if(head==NULL)
+    printf("List is Empty!!\n");
+    else{
+        Node *t = head;
+        head = head->next;
+        free(t);
+        printf("Node Deleted!!\n");
+    }
     
-    
-    
+}
+void deleteNodeFromEnd(){
+    if(head == NULL)
+    printf("List is Empty!!\n");
+    else{
+        Node *t;
+        if(head->next == NULL){
+            t = head;
+            head = NULL;
+        }
+        else{
+            Node* temp = head;
+            while(temp->next->next != NULL){
+                temp = temp->next;
+            }
+            t = temp-> next;
+            temp->next = NULL;
+        }
+        free(t);
+        printf("Node Deleted!!!\n");
+         
+    }
+}
+void deleteNodeFromAnyPos(int pos){
+    if(head==NULL){
+        printf("List is Empty!!\n");
+        else if(pos==1)
+        deleteNodeFromBeg();
+        else{
+            int i=1;
+            Node* temp = head;
+            while(i<pos-1 && temp->next != NULL){
+            temp = temp->;
+            i++;
+            temp = temp->next;
+            
+        }
+        if(temp->next != NULL && pos>0){
+            Node *t = temp->next;
+            temp->next  = temp->next->next;
+            free(t);
+            printf("Node Deleted!!!\n");
+        }
+        else
+        printf("Invalid Position!!!")
+        }
+    }
+}
+void search(int target){
+    if(head == NULL)
+    printf("lis is Empty!!\n");
+    else{
+        Node* temp = head;
+        while(temp != NULL){
+            if(temp->data == taget){
+                printf("Found !!\n");
+                return;
+            }
+        }
+        printf("Not Found !!!\n");
+    }
 }
 void display(){
     if(head==NULL)
@@ -93,14 +163,23 @@ int main(){
               case 3:
             break;
               case 4:
+              printf("Enter value :");
+              scanf("%d",&value);
+              deleteNodeFromBeg();
             break;
               case 5:
+              deleteNodeFromEnd();
             break;
               case 6:
+              deleteNodeFromAnyPos();
             break;
               case 7:
+             printf("Enter value :")
+             search(value);
+              scanf("%d",&value);
             break;
               case 8:
+              sort();
             break;
               case 9:
               display();
@@ -113,4 +192,4 @@ int main(){
         system("pause");
     }
     return 0;
-}
+} 
