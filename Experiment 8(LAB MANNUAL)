@@ -1,0 +1,98 @@
+#include <stdio.h>
+struct Node{
+    struct Node* prev;
+    int data;
+    struct Node* next;
+};
+struct Node* head = NULL;
+struct Node* createNode(int ele){
+    struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
+    temp->data = ele;
+    temp->next = temp->prev = NULL;
+    return temp;
+}
+void insertNodeInBeg(int ele){
+    struct Node* newNode = createNode(ele);
+    if(head==NULL)
+    head = newNode;
+    else{
+        newNode->next = head;
+        head->prev = newNode;
+        head = newNode;
+    }
+    printf("Node Inserted!!!!!");
+}
+void insertNodeAtEnd(int ele){
+    
+}
+void insertNodeAtAnyPos(int ele , int pos){
+    
+}
+void deleteNodeFromBeg(){
+    
+}
+void deleteNodeFromEnd(){
+    
+}
+void deleteNodeAtAnyPosition(){
+    
+}
+
+int main(){
+    int value;
+    while(1){   
+        printf("---- Doubly Linked List -----\n");
+        printf("1. Insert Node In Beginning\n");
+        printf("2. Insert Node at End\n");
+        printf("3. Insert Node At Any Position\n");
+        printf("4. Delete Node From Beginning\n");
+        printf("5. Delete Node From End\n");
+        printf("6. Delete Node From Any Position\n");
+        printf("7. Search Element In List\n");
+        printf("8. Sort Elements\n");
+        printf("9. Display List\n");
+        printf("10. Exit\n\n");
+        int choice;
+        printf("Enter Choice: ");
+        scanf("%d",&choice);
+        switch(choice){
+            case 1:
+            printf("Enter Value :");
+            scanf("%d",&value);
+            insertNodeInBeg(value);
+             break;
+              case 2:
+            break;
+              case 3:
+            break;
+              case 4:
+              printf("Enter value :");
+              scanf("%d",&value);
+              deleteNodeFromBeg();
+            break;
+              case 5:
+              deleteNodeFromEnd();
+            break;
+              case 6:
+              deleteNodeFromAnyPos();
+            break;
+              case 7:
+             printf("Enter value :")
+             search(value);
+              scanf("%d",&value);
+            break;
+              case 8:
+              sort();
+            break;
+              case 9:
+              display();
+            break;
+              case 10:
+                exit(0);
+                default:
+                printf("Invalid Choice!!!!\n");
+        }
+        system("pause");
+    }
+    return 0;
+} 
