@@ -1,143 +1,156 @@
-#include<stdio.h>
-#include<stdlib.h>
-typedef struct Node{
+#include <stdio.h>
+struct Node{
+    struct Node* prev;
     int data;
     struct Node* next;
-}Node;
-Node* head = NULL;
-Node* createNode(int ele){
-    Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->data = ele;
-    newNode->next = NULL;
-    return newNode;
+};
+struct Node* head = NULL;
+struct Node* createNode(int ele){
+    struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
+    temp->data = ele;
+    temp->next = temp->prev = NULL;
+    return temp;
 }
 void insertNodeInBeg(int ele){
-    Node* newNode = createNode(ele);
-    head = newNode;
-    printf("Node Inserted !!!!!\n");
-    
-}
-void insertNodeAtEnd(int ele){
-    Node*newNode = createNode(ele);
+    struct Node* newNode = createNode(ele);
     if(head==NULL)
     head = newNode;
     else{
-        Node* temp = head;
-        while(temp->next != NULL){
-            temp = temp->next;
-        }
-        temp->next  = newNode;
-        printf("Node Inserted !!!\n");
+        newNode->next = head;
+        head->prev = newNode;
+        head = newNode;
     }
+    printf("Node Inserted!!!!!");
+}
+void insertNodeAtEnd(int ele){
+ struct Node* newNode = createNode(ele);
+ if(head===NULL)
+ head = newNode;
+ else{
+     struct Node* temp = head;
+     while(temp->next != NULL){
+         temp = temp->next;
+     }
+     temp->next = newNode;
+     newNode->prev = temp;
+ }
+ printf("Node Inseted!!!!!!!!!!!!\n");
 }
 void insertNodeAtAnyPos(int ele , int pos){
     if(head==NULL)
-    printf("List is Empty!!!\n");
+    printf("LIst is Empty!!!!\n");
     else if(pos==1)
     insertNodeInBeg(ele);
     else{
-        int i = 1;
-        Node* temp = head;
-        while(i<pos-1 && temp->next != NULL){
-            temp = temp->;
+        int i= 1;
+        struct Node* temp = head;
+        while(i != pos && temp != NULL){
             i++;
+            temp = temp->next;
         }
-        if(temp->next != NULL){
-            Node* newNode = createNode(ele);
-            newNode->next = temp->next;
-            temp=>next = newNode;
-            
+        if(temp != NULL && pos>0){
+            struct Node* newNode = createNode(ele);
+            newNode->prev = temp->prev;
+            temp->prev->next = newNode;
+            newNode->next = temp;
+            temp->prev = newNode;
+            printf("Node Inserted!\n");
         }
+        else
+        printf("Invalid Position!!!\n");
     }
-
 }
 void deleteNodeFromBeg(){
     if(head==NULL)
-    printf("List is Empty!!\n");
-    else{
-        Node *t = head;
-        head = head->next;
-        free(t);
-        printf("Node Deleted!!\n");
-    }
+    printf("List is Empty!!!\n");
     
 }
-void deleteNodeFromEnd(){
-    if(head == NULL)
-    printf("List is Empty!!\n");
-    else{
-        Node *t;
-        if(head->next == NULL){
-            t = head;
-            head = NULL;
-        }
-        else{
-            Node* temp = head;
-            while(temp->next->next != NULL){
-                temp = temp->next;
-            }
-            t = temp-> next;
-            temp->next = NULL;
-        }
-        free(t);
-        printf("Node Deleted!!!\n");
-         
-    }
+else {
+    struct Node* temp = head;
+    head = head->next;
+    if(head != NULL)
+    head->prev = NULL;
+    
+    
+    free(temp);
+    printf("Node Deleted!!!!\n");
 }
-void deleteNodeFromAnyPos(int pos){
-    if(head==NULL){
-        printf("List is Empty!!\n");
-        else if(pos==1)
-        deleteNodeFromBeg();
-        else{
-            int i=1;
-            Node* temp = head;
-            while(i<pos-1 && temp->next != NULL){
-            temp = temp->;
+void deleteNodeFromEnd(){
+   if(head==NULL)
+    printf("List is Empty!!!\n");
+    
+}
+else {
+    struct Node* temp = head;
+    while(temp->next != NULL){
+        temp = temp -> next;
+    }
+    if(temp->prev != NULL)
+    temp->prev->next = NULL;
+    else
+    head = NULL;
+    free(temp);
+    printf("Node Deleted!!!\n");
+}
+}
+void deleteNodeAtAnyPosition(){
+    if(head==NULL)
+    printf("List is Empty!!!!\n");
+    else if(pos==1)
+    deleteNodeFromBeg();
+    else{
+        int i = 1;
+        struct Node* temp = head;
+        while(i != pos && temp != NULL){
             i++;
             temp = temp->next;
+        }
+        if(temp != NULL){
+            temp->prev->next = temp->next;
+            if(temp->next != NULL)
+            temp->next->prev = temp->prev;
+            free(temp);
+            printf("Node Deleted!!!!!\n");
             
         }
-        if(temp->next != NULL && pos>0){
-            Node *t = temp->next;
-            temp->next  = temp->next->next;
-            free(t);
-            printf("Node Deleted!!!\n");
-        }
         else
-        printf("Invalid Position!!!")
-        }
+        printf("Invalid Position!!!\n");
     }
 }
 void search(int target){
-    if(head == NULL)
-    printf("lis is Empty!!\n");
-    else{
-        Node* temp = head;
-        while(temp != NULL){
-            if(temp->data == taget){
-                printf("Found !!\n");
-                return;
+    if(head==NULL){
+        printf("List is Empty!!!\n");
+        else{
+            struct Node* temp = head;
+            while(temptemp != NULL){
+                if(temp->data == target){
+                    printf("Element Found!!!\n");
+                    return;
+                }
+                temp = temp->next;
             }
-        }
-        printf("Not Found !!!\n");
+        
     }
 }
 void display(){
-    if(head==NULL)
-    printf("Linked List is empty!!!!\n");
-    else{
-        Node* temp = head;
-        while(temp != NULL){
-            printf("%d ",temp->data);
-            temp = temp->next;
-        }
+     if(head==NULL){
+        printf("List is Empty!!!\n");
+        else{
+            struct Node* temp = head;
+            while(temptemp != NULL){
+                    printf("%d ",temp->data);
+                     temp = temp->next;
+                }
+               printf("\n")
+            }
+        
     }
-}
+
+
 int main(){
     int value;
     while(1){   
-        printf("---- Singly Linked List -----\n");
+        printf("---- Doubly Linked List -----\n");
         printf("1. Insert Node In Beginning\n");
         printf("2. Insert Node at End\n");
         printf("3. Insert Node At Any Position\n");
@@ -156,8 +169,7 @@ int main(){
             printf("Enter Value :");
             scanf("%d",&value);
             insertNodeInBeg(value);
-            
-            break;
+             break;
               case 2:
             break;
               case 3:
