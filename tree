@@ -1,0 +1,18 @@
+void preorder(int root){
+if(tree[root] == -1)
+return ;
+printf("%d ", tree[root]);
+preorder(2*root+1);//left child
+preorder(2*root+2);//right child
+}
+
+
+
+void inorder(int root){
+if(tree[root] == -1)
+return ;
+
+inorder(2*root+1);// left child
+printf("%d ", tree[root]);
+inorder(2*root+2);//right child
+}
