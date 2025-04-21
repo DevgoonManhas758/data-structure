@@ -16,3 +16,15 @@ inorder(2*root+1);// left child
 printf("%d ", tree[root]);
 inorder(2*root+2);//right child
 }
+
+
+
+void postorder(int root){
+if(tree[root] == -1)
+return ;
+
+postorder(2*root+1);// left child 
+postorder(2*root+2);//right child
+printf("%d ", tree[root]);
+}
+
