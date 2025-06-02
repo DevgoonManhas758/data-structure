@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node{
+    int data;
+    struct Node* left;
+    struct Node* right;
+}; 
+struct Node* CreateNode(int value){
+    struct Node* newnode = (struct Node*)malloc(sizeof(struct Node));
+    newnode->data = value;
+    newnode->left = newnode->right = NULL;
+    return newnode;
+}
+struct Node* insert(struct Node* root ,  int value){
+    struct Node* queue[100];
+    int front = 0 , rear = 0;
+    queue[rear++] = root;
+    while(front != rear){
+        struct Node* temp = queue[front];
+        if(temp->left == NULL){
+            temp->left = CreateNode(value);
+            break;
+        }
+         else if(temp->right == NULL){
+            temp->right = CreateNode(value);
+            break;
+        }
+        else{
+            queue[rear++] = temp->left;
+            queue[rear++] = temp->right;
+            
+        }
+    }
+    return root;
+}
+struct Node* search(struct Node* root , int target){
+    struct Node* queue[100];
+    int front = 0 , rear = 0;
+    queue[rear++] = root;
+    while(front != rear){
+        struct Node* temp = queue[front];
+        if(temp->data == target){
+            return temp;
+        }
+       if(temp->left != NULL){
+            queue[rear++] = temp->left;
+        }
+        if(temp->right != NULL){
+            queue[rear++] = temp->right;
+            
+        }
+         
+        
+    }
+   
+    return NULL;
+}
+int main(){
+    struct Node* root = NULL;
+    int n, value , k;
+    scanf("%d",&n);
+    for(int i = 0 ; i < n ; i++){
+        scanf("%d",&value);
+        insert(root,value);
+    }
+    scanf("%d",&k);
+   if(search(root,k)){
+       printf("Found\n");
+   }
+    else{
+        printf("Not Found\n");
+    }
+    return 0;
+}
